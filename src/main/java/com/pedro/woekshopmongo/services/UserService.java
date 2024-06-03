@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pedro.woekshopmongo.domain.User;
+import com.pedro.woekshopmongo.dto.UserDTO;
 import com.pedro.woekshopmongo.repository.UserRepository;
 import com.pedro.woekshopmongo.services.exception.ObejectNotFoundException;
 
@@ -24,6 +25,16 @@ public class UserService {
 	public User findById(String id) {
 		Optional<User> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObejectNotFoundException("Objeto não encontrado"));
+		
+	}
+	
+	public User insert(User obj) {
+		return repo.insert(obj);
+		
+	}
+	
+	public User fromDTO(UserDTO objDto) {
+		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 		
 	}
 }
